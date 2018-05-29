@@ -1,0 +1,13 @@
+<% if object.errors.any? %>
+  <div class="alert alert-warning">
+    <div class="alert-heading">
+      <h5><i class="glyphicon glyphicon-exclamation-sign"></i> Found errors while saving</h5>
+    </div>
+
+    <ul class="alert-body">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

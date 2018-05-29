@@ -1,5 +1,7 @@
 <div class="center hero-unit">
 <h1>Welcome to the Good Reads</h1>
+<br>
+<br>
 
 <h2>
     We are the IMDB for books.<br>
@@ -7,9 +9,13 @@
     <a href="https://goodreads.com/">Original</a>
     website.
 </h2>
+<br>
 
-<%= link_to "Sign up now!", "#",
-    class: "btn btn-large btn-primary" %>
+<% if !current_user %>
+    <%= link_to "Sign up now!", new_user_path,
+        class: "btn btn-large btn-primary" %>
+<% end %>
+
 </div>
 
 <%= link_to image_tag("goodreads_logo.png", alt: "GoodReads", id: "landing-logo"), 'https://goodreads.com/' %>
