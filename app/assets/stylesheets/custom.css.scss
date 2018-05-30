@@ -43,6 +43,22 @@ textarea {
   margin-bottom: 10px;
 }
 
+.form-control{
+  height: 100%!important;
+}
+
+.large-text {
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display: block;
+  max-width: 250px;
+}
+
+.synopsis{
+  font-size: 13px;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6 {
@@ -77,6 +93,12 @@ li {
 }
 /* header */
 
+#navbar{
+  display: block;
+  margin: 0px;
+  padding: 0px;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -99,7 +121,7 @@ li {
 footer {
   position:absolute;
   bottom:0;
-  width:96%;
+  width: 100%;
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;

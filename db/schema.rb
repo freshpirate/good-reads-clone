@@ -11,17 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180529104455) do
+ActiveRecord::Schema.define(:version => 20180529130920) do
+
+  create_table "books", :force => true do |t|
+    t.string   "title"
+    t.string   "isbn_number"
+    t.string   "author"
+    t.string   "synopsis"
+    t.string   "published_year"
+    t.string   "language"
+    t.string   "cover"
+    t.string   "publisher"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "books", ["isbn_number"], :name => "index_books_on_isbn_number"
 
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "name"
     t.string   "perishable_token"
+    t.boolean  "admin",             :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
