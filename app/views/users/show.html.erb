@@ -1,0 +1,21 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+    <aside class="span1">
+        <%= gravatar_for @user %>
+    </aside>
+    <aside class="span3">
+        <h4 style="margin-top: 0px; margin-bottom:0px"><%= @user.name %></h4>
+        <br>
+        <% if current_user?(@user) %>
+            <h5 style="margin-top: 0px; margin-bottom:0px"><%= @user.email %></h5>
+        <% end %>
+    </aside>
+
+  <div class="span7 offset1">
+  	<h3>Reviews (<%= @user.book_relationships.count %>)</h3>
+  		<ol class="reviews">
+        <%= render @relationships %>
+      </ol>
+      <%= will_paginate @relationships %>
+  </div>
+</div>

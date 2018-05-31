@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
 
     before_filter :require_no_user, :only => [:new, :create]
-    before_filter :require_user, :only => [:edit, :update, :show, :destroy]
+    before_filter :require_user, :only => [:edit, :update, :show, :destroy, :index]
     before_filter :correct_user,   only: [:edit, :update, :destroy]
+
+    def index
+    end
 
     def new
         @user = User.new
@@ -23,12 +26,23 @@ class UsersController < ApplicationController
     end
 
     def update
+        @user = User.find(params[:id])
+
+        if @user.update_attributes(params[:user])
+            # update successful
+            flash[:success] = "Profile updated"
+            redirect_to @user
+        else
+            render 'edit'
+        end
     end
 
     def destroy
     end
 
     def show
+        @user = User.find(params[:id])
+        @relationships = @user.book_relationships.paginate(page: params[:page])
     end
 
     private

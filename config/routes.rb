@@ -9,7 +9,7 @@ GoodReads::Application.routes.draw do
 
   root :to => "static_pages#home"
 
-  resources :users,           only: [:new, :create, :index, :show, :edit, :update]
+  resources :users,           only: [:new, :create, :index, :show, :edit, :update, :destroy]
   resources :user_sessions,   only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :book_relationships, only: [:create, :update, :destroy]  

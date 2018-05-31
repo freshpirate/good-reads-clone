@@ -1,6 +1,6 @@
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
+$grayLight: #eaeaea;
 
 /* THEME */
 $textDark: #382312;
@@ -161,4 +161,34 @@ footer ul li {
 #landing-logo{
   height: 40px;
   float: right;
+}
+
+/* User's Profile */
+
+.reviews {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+  font-size: 15px;  
+}
+.timestamp {
+  color: $grayLight;
+  font-size: 12px;
+}
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
 }

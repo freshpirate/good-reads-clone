@@ -18,7 +18,7 @@
 <% @books.each do |book| %>
   <tr>
     <td><%= link_to image_tag(book.cover, alt: book.title, width: '60px'), book.cover %></td>
-    <td><%= book.title %></td>
+    <td><%= link_to book.title, book %></td>
     <td class='large-text'><%= book.isbn_number %></td>
     <td><%= book.author %></td>
     <td class='large-text'><%= book.synopsis %></td>
