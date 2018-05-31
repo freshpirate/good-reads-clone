@@ -8,3 +8,7 @@ Its a replica of [GoodReads](https://goodreads.com), and also my attempt to lear
 - **Bootstrap** (2.3)
 
 Please refer Gemfile for more details.
+
+## TODOs
+- **Bookmark**: User can mark a book as either '*read*', '*currently reading*', '*want to read*'
+- **Follow/Feed**: A user can follow other users and can read/post blogs (*May not be required*)
