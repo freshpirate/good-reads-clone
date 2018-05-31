@@ -1,12 +1,8 @@
 class BookRelationshipsController < ApplicationController
     
     def create
-        puts '========BEFORE========='
         @relationship = BookRelationship.new(params[:book_relationship])
-        # @relationship.user = current_user
-        # @relationship.book=
-        puts @relationship.attributes
-        puts '========Mid========='
+
         if @relationship.save
             flash[:success] = "Review added successfully!"
             redirect_to book_path(@relationship.book)

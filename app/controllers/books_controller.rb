@@ -27,11 +27,6 @@ class BooksController < ApplicationController
       @relationship.book=@book
     end
 
-
-    puts '=======Start========'
-    puts @relationship.attributes
-    puts '========Mid========='
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @book }
