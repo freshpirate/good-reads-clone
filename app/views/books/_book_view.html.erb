@@ -1,0 +1,33 @@
+<div class='col-sm-3'>
+    <div style="margin-top: 17px"><%= image_tag @book.cover, alt: @book.title %></div>
+</div>
+
+<div class='col-sm-9'>
+    <div class="">
+    <h2 style="text-align: left;"><%= @book.title %></h2>
+    </div>
+
+    <div class="">
+    <h5>by <%= @book.author %></h5>
+    </div>
+
+    <div class="synopsis">
+    <p><%= @book.synopsis %></p>
+    </div>
+
+    <hr>
+    <p>
+        <b>Published year:</b>
+        <%= @book.published_year %>
+    </p>
+
+    <p>
+        <b>Language:</b>
+        <%= @book.language %>
+    </p>
+
+    <p>
+        <b>Publisher:</b>
+        <%= @book.publisher %>
+    </p>
+</div>

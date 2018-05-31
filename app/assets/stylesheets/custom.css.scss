@@ -25,6 +25,7 @@ html {
 
 body {
   padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 section {
@@ -91,12 +92,20 @@ p {
 li {
   color: $textDark;
 }
+ul {
+  list-style-type: none;
+
+}
+
+
 /* header */
 
 #navbar{
   display: block;
   margin: 0px;
   padding: 0px;
+  background-image: none!important;
+  background-color: $background;
 }
 
 #logo {
@@ -119,7 +128,7 @@ li {
 /* footer */
 
 footer {
-  position:absolute;
+  position:fixed;
   bottom:0;
   width: 100%;
   margin-top: 45px;

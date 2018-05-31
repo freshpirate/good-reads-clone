@@ -17,6 +17,7 @@ class BooksController < ApplicationController
   # GET /books/1.json
   def show
     @book = Book.find(params[:id])
+    @review_items = @book.book_relationships.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # show.html.erb

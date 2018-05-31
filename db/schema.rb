@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180529130920) do
+ActiveRecord::Schema.define(:version => 20180530121742) do
+
+  create_table "book_relationships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "status_id",  :limit => 255
+    t.string   "rating"
+    t.string   "review"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "book_relationships", ["book_id"], :name => "index_book_relationships_on_book_id"
+  add_index "book_relationships", ["user_id", "book_id"], :name => "index_book_relationships_on_user_id_and_book_id", :unique => true
+  add_index "book_relationships", ["user_id", "status_id"], :name => "index_book_relationships_on_user_id_and_status"
+  add_index "book_relationships", ["user_id"], :name => "index_book_relationships_on_user_id"
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -27,6 +42,12 @@ ActiveRecord::Schema.define(:version => 20180529130920) do
   end
 
   add_index "books", ["isbn_number"], :name => "index_books_on_isbn_number"
+
+  create_table "status_categories", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
