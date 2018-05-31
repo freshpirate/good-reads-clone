@@ -1,8 +1,8 @@
-<div class='col-sm-3'>
+<div class='span3'>
     <div style="margin-top: 17px"><%= image_tag @book.cover, alt: @book.title %></div>
 </div>
 
-<div class='col-sm-9'>
+<div class='span9'>
     <div class="">
     <h2 style="text-align: left;"><%= @book.title %></h2>
     </div>
@@ -30,4 +30,15 @@
         <b>Publisher:</b>
         <%= @book.publisher %>
     </p>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
+        <% if @book.book_relationships.find_by_user_id(current_user).nil? %>
+          Add a Review
+        <% else %>
+          Update Review
+        <% end %>
+    </button>
 </div>
+
+<%= render "review_modal" %>

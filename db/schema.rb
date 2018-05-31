@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180530121742) do
+ActiveRecord::Schema.define(:version => 20180531061119) do
 
   create_table "book_relationships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "book_id"
-    t.integer  "status_id",  :limit => 255
+    t.integer  "status_id",  :limit => 255, :default => 1
     t.string   "rating"
     t.string   "review"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
   end
 
   add_index "book_relationships", ["book_id"], :name => "index_book_relationships_on_book_id"

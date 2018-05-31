@@ -1,11 +1,12 @@
 <li id="<%= review_item.id %>">
+    <hr>
     <div class="container">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-2 span2">
                 <%= link_to gravatar_for(review_item.user), review_item.user %>
             </div>
             
-            <div class="col-sm-8">
+            <div class="col-sm-8 span8">
                 <h4><%= link_to review_item.user.name, review_item.user %></h4>
 
                 <b>Rating: </b><%= review_item.rating %>
@@ -14,7 +15,12 @@
                 <p><%= review_item.review %></p>
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-2 span2">
+                <% if current_user?(review_item.user) %>
+                    <%= link_to "delete", review_item, method: :delete,
+                                     data: { confirm: "Are you sure?" },
+                                     title: review_item.review %>
+                <% end %>
             </div>
         </div>
     </div>

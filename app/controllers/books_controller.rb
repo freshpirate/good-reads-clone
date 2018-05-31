@@ -18,6 +18,19 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @review_items = @book.book_relationships.paginate(page: params[:page])
+    
+    @relationship = @book.book_relationships.find_by_user_id(current_user.id)
+    
+    if @relationship.nil?
+      @relationship = BookRelationship.new
+      @relationship.user=current_user
+      @relationship.book=@book
+    end
+
+
+    puts '=======Start========'
+    puts @relationship.attributes
+    puts '========Mid========='
 
     respond_to do |format|
       format.html # show.html.erb

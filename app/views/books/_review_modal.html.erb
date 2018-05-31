@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div id="reviewModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Review</h3>
+  </div>
+  <div class="modal-body">
+
+    <%= form_for(@relationship) do |f| %>
+      <%= render 'shared/errors', object: f.object %>
+
+      <div class="container">
+        <div class="">
+            <div class="span1">
+                <%= image_tag @book.cover, alt: @book.title, width: "50px" %>
+            </div>
+
+            <div class="span8">
+                <h4><%= @book.title %></h4>
+                <h5>by <%= @book.author %></h5>
+            </div>
+        </div>
+      </div>
+
+      <hr>
+      <input type="hidden" class="rating">
+      
+      <%= f.label :rating %>
+      <%= f.text_field :rating, class: "text-field" %>
+
+      <%= f.label :review %>
+      <%= f.text_area :review, class: "text-area" %>
+
+      <%= f.hidden_field :book_id %>
+      <%= f.hidden_field :user_id %>
+
+        <br/>
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+
+      <% puts '=======Begin========' %>
+    <% puts @relationship.attributes %>
+    <% end %>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <!--<button class="btn btn-primary">Save changes</button>-->
+  </div>
+</div>
