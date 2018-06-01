@@ -1,5 +1,7 @@
 <div class='span3'>
     <div style="margin-top: 17px"><%= image_tag @book.cover, alt: @book.title %></div>
+
+    <%= render 'bookmark_dropdown' %>
 </div>
 
 <div class='span9'>

@@ -18,6 +18,8 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @review_items = @book.book_relationships.paginate(page: params[:page])
+    @status_categories = StatusCategory.all
+    @current_status = current_user.statuses.find_by_book_id(@book)
     
     @relationship = @book.book_relationships.find_by_user_id(current_user.id)
     
