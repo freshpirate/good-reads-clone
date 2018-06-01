@@ -1,0 +1,22 @@
+<div class="page-header"><h1>My Books</h1></div>
+
+<%= will_paginate @statuses %>
+<table class="table table-striped">
+  <tr>
+    <th>Cover</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Status</th>
+  </tr>
+
+    <% @statuses.each do |status| %>
+        <% $book = status.book %>
+    <tr>
+        <td><%= link_to image_tag($book.cover, alt: $book.title, width: '60px'), $book.cover %></td>
+        <td><%= link_to $book.title, $book %></td>
+        <td><%= $book.author %></td>
+        <td><%= status.status_category.name %></td>
+    </tr>
+    <% end %>
+</table>
+<%= will_paginate @statuses %>

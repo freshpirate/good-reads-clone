@@ -14,6 +14,7 @@ GoodReads::Application.routes.draw do
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :book_relationships, only: [:create, :update, :destroy]  
   resources :statuses, only: [:create, :update, :destroy]
+  resources :my_books, only: [:index]
 
 
   delete '/sign_out', to: "user_sessions#destroy", as: :sign_out
