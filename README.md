@@ -10,5 +10,7 @@ Its a replica of [GoodReads](https://goodreads.com), and also my attempt to lear
 Please refer Gemfile for more details.
 
 ## TODOs
-- **Bookmark**: User can mark a book as either '*read*', '*currently reading*', '*want to read*'
+- ~~**Bookmark**: User can mark a book as either '*read*', '*currently reading*', '*want to read*'~~**[Done]**
 - **Follow/Feed**: A user can follow other users and can read/post blogs (*May not be required*)
+- **Expose APIs**
+- **Migrate UI to EmberJS**
