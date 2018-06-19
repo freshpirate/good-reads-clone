@@ -17,6 +17,10 @@ class UsersController < ApplicationController
         @user.confirmation_token = gen_token
 
         if @user.save
+            
+            # Send confirmation mail
+            UserMailer.new_user(@user).deliver
+
             flash[:success] = "Registered Successfully!"
             redirect_to root_url
         else
@@ -59,7 +63,7 @@ class UsersController < ApplicationController
                 flash[:error] = "Can not update"
                 redirect_to root_url
             end
-            
+
         else
             flash[:error] = "Invalid Token"
             redirect_to root_url
