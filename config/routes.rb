@@ -20,6 +20,9 @@ GoodReads::Application.routes.draw do
   delete '/sign_out', to: "user_sessions#destroy", as: :sign_out
   get '/sign_in', to: "user_sessions#new", as: :sign_in
 
+  # New User Registration confirmation
+  get '/confirm_user/:id/:token', to: "users#confirm", as: :email_confirmation
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180601101726) do
+ActiveRecord::Schema.define(:version => 20180619123803) do
 
   create_table "book_relationships", :force => true do |t|
     t.integer  "user_id"
@@ -66,11 +66,13 @@ ActiveRecord::Schema.define(:version => 20180601101726) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "name"
     t.string   "perishable_token"
-    t.boolean  "admin",             :default => false
+    t.boolean  "admin",              :default => false
+    t.boolean  "email_confirmation", :default => false
+    t.string   "confirmation_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

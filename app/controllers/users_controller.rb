@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(users_params)
+        @user.confirmation_token = gen_token
+
         if @user.save
             flash[:success] = "Registered Successfully!"
             redirect_to root_url
@@ -46,13 +48,29 @@ class UsersController < ApplicationController
         @relationships = @user.book_relationships.paginate(page: params[:page])
     end
 
+    def confirm
+        @user = User.find(params[:id])
+        if @user.confirmation_token == params[:token]
+            if @user.update_attributes(email_confirmation: true)
+                # update successful
+                flash[:success] = "Email confirmation successful! Now you can sign in to access our contents"
+                redirect_to root_url
+            else
+                flash[:error] = "Can not update"
+                redirect_to root_url
+            end
+            
+        else
+            flash[:error] = "Invalid Token"
+            redirect_to root_url
+        end
+    end
+
     private
 
     def users_params
         params.require(:user).permit(:email, :password, :password_confirmation, :name)
     end
-
-    private
 
     def correct_user
         @user = User.find(params[:id])
@@ -60,5 +78,9 @@ class UsersController < ApplicationController
             flash[:warning] = "Sign in with the appropriate User to perform this action"
             redirect_to root_url
         end
+    end
+
+    def gen_token(length=128)
+        rand(36**length).to_s(36)
     end
 end

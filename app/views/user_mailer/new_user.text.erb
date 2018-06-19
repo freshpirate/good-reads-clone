@@ -1,0 +1,6 @@
+Dear <%= @user.name %>,
+
+Thank you for registering with Bad Reads.
+One last step towards registration is to confirm your email. Please click on the link below to register.
+
+<%= email_confirmation_url(id: @user.id, token: @user.confirmation_token) %>
