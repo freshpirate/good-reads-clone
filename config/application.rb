@@ -58,5 +58,8 @@ module GoodReads
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Set Background jobs adapter
+    # config.active_job.queue_adapter = :sidekiq
   end
 end

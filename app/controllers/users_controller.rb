@@ -19,7 +19,8 @@ class UsersController < ApplicationController
         if @user.save
             
             # Send confirmation mail
-            UserMailer.new_user(@user).deliver
+            # UserMailer.new_user(@user).deliver
+            SendMailWorker.perform_async(@user.id)
 
             flash[:success] = "Registered Successfully!"
             redirect_to root_url
