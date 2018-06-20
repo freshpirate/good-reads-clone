@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180619123803) do
+ActiveRecord::Schema.define(:version => 20180620085612) do
 
   create_table "book_relationships", :force => true do |t|
     t.integer  "user_id"
@@ -36,8 +36,10 @@ ActiveRecord::Schema.define(:version => 20180619123803) do
     t.string   "language"
     t.string   "cover"
     t.string   "publisher"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.float    "average_rating", :default => 0.0
+    t.integer  "rating_count",   :default => 0
   end
 
   add_index "books", ["isbn_number"], :name => "index_books_on_isbn_number"
