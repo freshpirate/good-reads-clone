@@ -12,4 +12,12 @@ class UserMailer < ActionMailer::Base
     mail to: @user.email,
          subject: "Confirm registration with Bad Reads"
   end
+
+  def top_rated(books)
+    @books = books
+
+    recipients = User.all.collect(&:email).join(",")
+    mail to: recipients,
+         subject: "List of Top Rated books"
+  end
 end

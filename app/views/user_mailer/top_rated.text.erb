@@ -1,0 +1,5 @@
+Here is a list of top rated books in our database!
+
+<% (0...@books.length).each do |i| %>
+    <%= link_to "#{i-1}. #{@books[i].title}", book_path(@books[i]) %>
+<% end %>
