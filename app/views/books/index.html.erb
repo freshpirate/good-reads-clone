@@ -1,5 +1,6 @@
 <div class="page-header"><h1>Listing books</h1></div>
 
+<%= will_paginate %>
 <table class="table table-hover">
   <tr>
     <th>Cover</th>
@@ -34,8 +35,9 @@
 <% end %>
 </table>
 
-<br />
-
 <% if current_user.admin? %>
+  <br/>
   <%= link_to 'New Book', new_book_path %>
 <% end %>
+
+<%= will_paginate %>
