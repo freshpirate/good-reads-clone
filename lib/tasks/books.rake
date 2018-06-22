@@ -1,3 +1,5 @@
+require 'net/http'
+
 namespace :books do
     desc 'Generate random books using Faker'
 
@@ -8,7 +10,7 @@ namespace :books do
             author = Faker::Book.author
             publisher = Faker::Book.publisher
             isbn_number = Faker::IDNumber.invalid
-            cover = Faker::LoremFlickr.image("311x475")
+            cover = "https://loremflickr.com#{Net::HTTP::get_response(URI("https://loremflickr.com/311/475"))['location']}"
             published_year = Faker::Date.backward(10000).year
             language = "English"
             synopsis = Faker::Lorem.paragraph(3, false, 7)
