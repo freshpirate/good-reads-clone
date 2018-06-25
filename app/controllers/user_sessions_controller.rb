@@ -10,8 +10,13 @@ class UserSessionsController < ApplicationController
         @user_session = UserSession.new(user_session_params)
         if @user_session.save
 
-            flash[:success] = "Welcome Back!"
-            redirect_to root_url
+            # flash[:success] = "Welcome Back!"
+            # redirect_to root_url
+            
+            respond_to do |format|
+                format.html { redirect_to root_url, notice: "Welcome Back!"}
+                format.json { render json: @user_session, status: :created }
+            end
         else
             render :new
         end
