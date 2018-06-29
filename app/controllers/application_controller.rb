@@ -23,8 +23,28 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = "You must be logged in to access this page"
-      redirect_to sign_in_path
+      notice_str = "You must be logged in to access this page"
+
+      respond_to do |format|
+        format.html do
+          flash[:notice] = notice_str
+          redirect_to root_url
+        end
+
+        format.json do
+          json_obj = {}
+          json_obj["error"] = true
+          json_obj["status"] = {}
+          json_obj["status"] = {
+            "signed_in": true,
+            "messages": [notice_str]
+          }
+
+          # json_obj["user"] = current_user
+
+          render json: json_obj, error: notice_str
+        end
+      end
       return false
     end
   end
@@ -32,8 +52,28 @@ class ApplicationController < ActionController::Base
   def require_admin_privileges
     unless current_user && current_user.admin?
       store_location
-      flash[:notice] = "You must be an administrator to access this page"
-      redirect_to root_url
+      notice_str = "You must be an administrator to access this page"
+
+      respond_to do |format|
+        format.html do
+          flash[:notice] = notice_str
+          redirect_to root_url
+        end
+
+        format.json do
+          json_obj = {}
+          json_obj["error"] = true
+          json_obj["status"] = {}
+          json_obj["status"] = {
+            "signed_in": true,
+            "messages": [notice_str]
+          }
+
+          # json_obj["user"] = current_user
+
+          render json: json_obj, error: notice_str
+        end
+      end
       return false
     end
   end
@@ -41,8 +81,28 @@ class ApplicationController < ActionController::Base
   def require_no_user
     if current_user
       store_location
-      flash[:notice] = "You must be logged out to access this page"
-      redirect_to root_url
+      notice_str = "You must be logged out to access this page"
+
+      respond_to do |format|
+        format.html do
+          flash[:notice] = notice_str
+          redirect_to root_url
+        end
+
+        format.json do
+          json_obj = {}
+          json_obj["error"] = true
+          json_obj["status"] = {}
+          json_obj["status"] = {
+            "signed_in": true,
+            "messages": [notice_str]
+          }
+
+          # json_obj["user"] = current_user
+
+          render json: json_obj.to_json, error: notice_str
+        end
+      end
       return false
     end
   end

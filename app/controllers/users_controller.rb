@@ -16,16 +16,38 @@ class UsersController < ApplicationController
         @user = User.new(users_params)
         @user.confirmation_token = gen_token
 
-        if @user.save
-            
-            # Send confirmation mail
-            # UserMailer.new_user(@user).deliver
-            SendMailWorker.perform_async(@user.id)
+        saved = @user.save
 
-            flash[:success] = "Registered Successfully!"
-            redirect_to root_url
-        else
-            render :new
+        respond_to do |format| 
+            format.html do
+
+                if saved
+                    flash[:success] = "Registered Successfully!"
+                    redirect_to root_url
+                else
+                    flash[:success] = "Can not create the user"
+                    render :new
+                end
+            end
+
+            format.json do
+                json_obj = {}
+
+                if saved
+                    json_obj["error"] = false
+                    json_obj["status"] = {}
+                    json_obj["user"] = @user
+                    render json: json_obj
+                else
+                    json_obj["error"] = true
+                    json_obj["status"] = {
+                        "messages": @user.errors.full_messages
+                    }
+                    json_obj["user"] = @user
+                    render json: json_obj
+                end
+                
+            end
         end
 
     end

@@ -1,15 +1,27 @@
 class BooksController < ApplicationController
   before_filter :require_admin_privileges, only: [:new, :create, :update, :destroy, :edit]
-  before_filter :require_user, only: [:index, :show]
+  # before_filter :require_user, only: [:index, :show]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.paginate(:page => params[:page])
+    # @book = Book.all
+    if params[:page] && params[:perPage]
+      @books = Book.page(params[:page]).per(params[:perPage])
+    else
+      @books = Book.all
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @books }
+      format.html do # index.html.erb
+        @books = Book.paginate(:page => params[:page])
+      end
+      format.json do
+        data = {
+          data: @books
+        }
+        render json: @books 
+      end
     end
   end
 
