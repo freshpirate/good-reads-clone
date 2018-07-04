@@ -11,6 +11,7 @@ gem 'authlogic'
 gem 'sidekiq', '3.4.2'
 gem 'rack-cors'
 gem 'kaminari'
+gem 'dalli'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

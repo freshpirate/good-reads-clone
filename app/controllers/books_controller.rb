@@ -12,16 +12,27 @@ class BooksController < ApplicationController
         @books = Book.paginate(:page => params[:page])
       end
       format.json do
+        @books = Rails.cache.fetch('books'){
+          Book.all
+        }
         if params[:page] && params[:per_page]
-          @books = Book.page(params[:page]).per(params[:per_page])
+          # @books1 = Book.page(params[:page]).per(params[:per_page])
+          m = params[:page].to_i
+          n = params[:per_page].to_i
+
+          s_idx = ((m - 1) * n)
+          e_idx = (m * n) - 1
+
+          total_pages = (@books.length / n.to_f).ceil
+          @books = @books[s_idx..e_idx]
+
           jsonObj = {
-            'meta': { 'total_pages': @books.total_pages },
+            'meta': { 'total_pages': total_pages },
             'books': @books.as_json
           }
 
           render json: jsonObj
         else
-          @books = Book.all
           render json: { 'books': @books.as_json }
         end
       end
