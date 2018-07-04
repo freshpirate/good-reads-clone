@@ -7,18 +7,23 @@ class BooksController < ApplicationController
   def index
     # @book = Book.all
 
-    if params[:page] && params[:perPage]
-      @books = Book.page(params[:page]).per(params[:perPage])
-    else
-      @books = Book.all
-    end
-
     respond_to do |format|
       format.html do # index.html.erb
         @books = Book.paginate(:page => params[:page])
       end
       format.json do
-        render json: @books 
+        if params[:page] && params[:per_page]
+          @books = Book.page(params[:page]).per(params[:per_page])
+          jsonObj = {
+            'meta': { 'total_pages': @books.total_pages },
+            'books': @books.as_json
+          }
+
+          render json: jsonObj
+        else
+          @books = Book.all
+          render json: { 'books': @books.as_json }
+        end
       end
     end
   end
