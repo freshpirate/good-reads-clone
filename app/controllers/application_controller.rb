@@ -6,12 +6,28 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def correct_user
+    @user = User.find(params[:id])
+    if !current_user?(@user)
+        flash[:warning] = "Sign in with the appropriate User to perform this action"
+        redirect_to root_url
+    end
+  end
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
   end
 
   def current_user
+    p request.headers.has_key?('HTTP_API_KEY')
+
+    if not defined?(@current_user) and (request.headers.has_key?('HTTP_API_KEY'))
+      @current_user = User.find_by_persistence_token(request.headers["HTTP_API_KEY"])
+    end
+
+    # byebug
+
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
   end
@@ -41,6 +57,8 @@ class ApplicationController < ActionController::Base
           }
 
           # json_obj["user"] = current_user
+          p '*'*50
+          p json_obj
 
           render json: json_obj, error: notice_str
         end

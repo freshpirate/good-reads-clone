@@ -7,18 +7,36 @@ class UserSessionsController < ApplicationController
     end
 
     def create
-        @user_session = UserSession.new(user_session_params)
-        if @user_session.save
 
-            # flash[:success] = "Welcome Back!"
-            # redirect_to root_url
-            
-            respond_to do |format|
-                format.html { redirect_to root_url, notice: "Welcome Back!"}
-                format.json { render json: @user_session, status: :created }
+        @user_session = UserSession.new(user_session_params.to_h)
+        saved =  @user_session.save
+ 
+        respond_to do |format|
+            format.html do 
+                if saved
+                    redirect_to root_url, notice: "Welcome Back!"
+                else 
+                    render :new
+                end
             end
-        else
-            render :new
+
+            format.json do
+                json_obj = {}
+
+                if saved
+                    json_obj["error"] = false
+                    json_obj["status"] = {}
+                    json_obj["user"] = @user_session
+                    render json: json_obj
+                else
+                    json_obj["error"] = true
+                    json_obj["status"] = {
+                        "messages": @user_session.errors.full_messages
+                    }
+                    json_obj["user"] = @user_session
+                    render json: json_obj
+                end
+            end
         end
     end
 

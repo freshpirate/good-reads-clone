@@ -1,5 +1,6 @@
 class BookRelationshipsController < ApplicationController
-    
+    before_filter :require_user, only: [:create, :update, :destroy]
+
     def create
         @relationship = BookRelationship.new(params[:book_relationship])
 

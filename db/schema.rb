@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180620085612) do
+ActiveRecord::Schema.define(:version => 20180629105159) do
 
   create_table "book_relationships", :force => true do |t|
     t.integer  "user_id"
@@ -78,5 +78,6 @@ ActiveRecord::Schema.define(:version => 20180620085612) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
 end

@@ -1,11 +1,12 @@
 class BooksController < ApplicationController
   before_filter :require_admin_privileges, only: [:new, :create, :update, :destroy, :edit]
-  # before_filter :require_user, only: [:index, :show]
+  before_filter :require_user, only: [:show]
 
   # GET /books
   # GET /books.json
   def index
     # @book = Book.all
+
     if params[:page] && params[:perPage]
       @books = Book.page(params[:page]).per(params[:perPage])
     else
@@ -17,9 +18,6 @@ class BooksController < ApplicationController
         @books = Book.paginate(:page => params[:page])
       end
       format.json do
-        data = {
-          data: @books
-        }
         render json: @books 
       end
     end
@@ -28,6 +26,8 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
+
+    # byebug
     @book = Book.find(params[:id])
     @review_items = @book.book_relationships.paginate(page: params[:page])
     @status_categories = StatusCategory.all

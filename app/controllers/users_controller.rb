@@ -99,14 +99,6 @@ class UsersController < ApplicationController
         params.require(:user).permit(:email, :password, :password_confirmation, :name)
     end
 
-    def correct_user
-        @user = User.find(params[:id])
-        if !current_user?(@user)
-            flash[:warning] = "Sign in with the appropriate User to perform this action"
-            redirect_to root_url
-        end
-    end
-
     def gen_token(length=128)
         rand(36**length).to_s(36)
     end
