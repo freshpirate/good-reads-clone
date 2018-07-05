@@ -228,6 +228,8 @@ DEPENDENCIES
   rack-cors
   rails (= 3.2.22.5)
   rake (< 11.0)
+  redis
+  redis-namespace
   rspec-rails (= 2.11.0)
   sass-rails (= 3.2.5)
   sidekiq (= 3.4.2)

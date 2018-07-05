@@ -8,6 +8,7 @@
           <% if current_user %>
             <% if current_user.admin? %>
               <li><%= link_to 'New Book', new_book_path %></li>
+              <li><%= link_to 'Spams', spam_domain_index_path %></li>
             <% end %>
             <li><%= link_to 'Explore', books_path %></li>
             <li><%= link_to 'My Books', my_books_path %></li>

@@ -1,5 +1,8 @@
 GoodReads::Application.routes.draw do
 
+  # get "/spam_domains", to: "spam_domain#index", as: :spam_index
+  # post "/spam_domains", to: "spam_domain#create", as: :new_spam
+
   resources :books
 
 
@@ -8,6 +11,9 @@ GoodReads::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
 
   root :to => "static_pages#home"
+
+  resources :spam_domain,           only: [:create, :index]
+  delete "/spam_domain", to: "spam_domain#destroy", as: :delete_spam
 
   resources :users,           only: [:new, :create, :index, :show, :edit, :update, :destroy]
   resources :user_sessions,   only: [:create, :destroy]

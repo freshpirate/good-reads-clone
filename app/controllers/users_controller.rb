@@ -22,10 +22,15 @@ class UsersController < ApplicationController
             format.html do
 
                 if saved
+                    # Send confirmation mail
+                    # UserMailer.new_user(@user).deliver
+                    p '^'*100
+                    SendMailWorker.perform_async(@user.id)
+
                     flash[:success] = "Registered Successfully!"
                     redirect_to root_url
                 else
-                    flash[:success] = "Can not create the user"
+                    # flash[:error] = "Can not create the user"
                     render :new
                 end
             end
@@ -43,7 +48,7 @@ class UsersController < ApplicationController
                     json_obj["status"] = {
                         "messages": @user.errors.full_messages
                     }
-                    json_obj["user"] = @user
+                    # json_obj["user"] = @user
                     render json: json_obj
                 end
                 

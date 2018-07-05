@@ -8,6 +8,8 @@ class UserMailer < ActionMailer::Base
   #
   def new_user(user)
     @user = user
+
+    p '*'*100
     
     mail to: @user.email,
          subject: "Confirm registration with Bad Reads"
