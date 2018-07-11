@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180711132940) do
+ActiveRecord::Schema.define(:version => 20180711134132) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20180711132940) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "statuses", :force => true do |t|
+  create_table "user_book_statuses", :force => true do |t|
     t.integer  "book_id"
     t.integer  "user_id"
     t.integer  "status_id"
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(:version => 20180711132940) do
     t.datetime "updated_at", :null => false
   end
 
-  add_index "statuses", ["book_id", "user_id"], :name => "index_statuses_on_book_id_and_user_id", :unique => true
-  add_index "statuses", ["book_id"], :name => "index_statuses_on_book_id"
-  add_index "statuses", ["status_id"], :name => "index_statuses_on_status_id"
-  add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
+  add_index "user_book_statuses", ["book_id", "user_id"], :name => "index_statuses_on_book_id_and_user_id", :unique => true
+  add_index "user_book_statuses", ["book_id"], :name => "index_statuses_on_book_id"
+  add_index "user_book_statuses", ["status_id"], :name => "index_statuses_on_status_id"
+  add_index "user_book_statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

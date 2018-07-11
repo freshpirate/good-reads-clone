@@ -1,4 +1,4 @@
-class Status < ActiveRecord::Base
+class UserBookStatus < ActiveRecord::Base
   attr_accessible :book_id, :status_id, :user_id
 
   belongs_to :user, class_name: "User"

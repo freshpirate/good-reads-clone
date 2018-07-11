@@ -1,4 +1,4 @@
-class CreateStatuses < ActiveRecord::Migration
+class CreateUserBookStatuses < ActiveRecord::Migration
   def up
     create_table :statuses do |t|
       t.integer :book_id

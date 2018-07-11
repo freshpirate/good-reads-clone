@@ -2,7 +2,7 @@
 <div class="btn-group" id="bookmark-dd-group">
 
     <% if @current_status.nil? %>
-        <%= link_to StatusCategory.first.name, statuses_path(status_id: 1, book_id: @book.id), method: :post, class: 'btn btn-success', id: 'bookmark-dd-btn' %>
+        <%= link_to StatusCategory.first.name, user_book_statuses_path(status_id: 1, book_id: @book.id), method: :post, class: 'btn btn-success', id: 'bookmark-dd-btn' %>
     <% else %>
         <button type="button" class="btn btn-secondary disabled" id="bookmark-dd-btn"><%= @current_status.status_category.name %></button>
     <% end %>
@@ -13,13 +13,13 @@
         <% if @current_status.nil? %>
             <!-- Creating new status relationship-->
             <% @status_categories.each do |category| %>
-                <%= link_to category.name, statuses_path(status_id: category.id, book_id: @book.id), method: :post, class: "dropdown-item" %>
+                <%= link_to category.name, user_book_statuses_path(status_id: category.id, book_id: @book.id), method: :post, class: "dropdown-item" %>
             <% end %>
         <% else %>
             <!-- Updating status-->
             <% @status_categories.delete_at(@status_categories.find_index(@current_status.status_category)) %>
             <% @status_categories.each do |category| %>
-                <%= link_to category.name, status_path(id: @current_status.id,status_id: category.id), method: :put, class: "dropdown-item" %>
+                <%= link_to category.name, user_book_status_path(id: @current_status.id,status_id: category.id), method: :put, class: "dropdown-item" %>
             <% end %>
         <% end  %>
     </div>

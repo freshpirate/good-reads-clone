@@ -47,7 +47,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @review_items = @book.reviews.paginate(page: params[:page])
     @status_categories = StatusCategory.all
-    @current_status = current_user.statuses.find_by_book_id(@book)
+    @current_status = current_user.user_book_statuses.find_by_book_id(@book)
     
     @relationship = @book.reviews.find_by_user_id(current_user.id)
     

@@ -1,8 +1,8 @@
-class StatusesController < ApplicationController
+class UserBookStatusesController < ApplicationController
     # before_filter :correct_user, :only => [:create, :update]
 
     def create
-        @status = Status.new
+        @status = UserBookStatus.new
         @status.status_id = params[:status_id]
         @status.user_id = current_user.id
         @status.book_id = params[:book_id]
@@ -17,7 +17,7 @@ class StatusesController < ApplicationController
     end
 
     def update
-        @status = Status.find(params[:id])
+        @status = UserBookStatus.find(params[:id])
         @status.status_id = params[:status_id]
 
         if @status.save
