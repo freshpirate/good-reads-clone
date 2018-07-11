@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_authentic
-  attr_accessible :crypted_password, :email, :password_salt, :persistence_token, :name, :password, :password_confirmation, :confirmation_token, :email_confirmation
+  attr_protected :email
   
   has_many :reviews, foreign_key: "user_id", dependent: :destroy
   has_many :user_book_statuses, foreign_key: 'user_id', dependent: :destroy
