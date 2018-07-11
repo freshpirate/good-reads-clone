@@ -1,5 +1,5 @@
 class StatusesController < ApplicationController
-    before_filter :correct_user, :only => [:create, :update]
+    # before_filter :correct_user, :only => [:create, :update]
 
     def create
         @status = Status.new

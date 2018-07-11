@@ -15,7 +15,7 @@ GoodReads::Application.routes.draw do
   resources :spam_domain,           only: [:create, :index]
   delete "/spam_domain", to: "spam_domain#destroy", as: :delete_spam
 
-  resources :users,           only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :users
   resources :user_sessions,   only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :book_relationships, only: [:create, :update, :destroy]  
