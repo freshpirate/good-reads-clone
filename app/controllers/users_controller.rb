@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        @relationships = @user.book_relationships.paginate(page: params[:page])
+        @relationships = @user.reviews.paginate(page: params[:page])
     end
 
     def confirm

@@ -45,14 +45,14 @@ class BooksController < ApplicationController
 
     # byebug
     @book = Book.find(params[:id])
-    @review_items = @book.book_relationships.paginate(page: params[:page])
+    @review_items = @book.reviews.paginate(page: params[:page])
     @status_categories = StatusCategory.all
     @current_status = current_user.statuses.find_by_book_id(@book)
     
-    @relationship = @book.book_relationships.find_by_user_id(current_user.id)
+    @relationship = @book.reviews.find_by_user_id(current_user.id)
     
     if @relationship.nil?
-      @relationship = BookRelationship.new
+      @relationship = Review.new
       @relationship.user=current_user
       @relationship.book=@book
     end

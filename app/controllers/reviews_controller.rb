@@ -1,8 +1,8 @@
-class BookRelationshipsController < ApplicationController
+class ReviewsController < ApplicationController
     before_filter :require_user, only: [:create, :update, :destroy]
 
     def create
-        @relationship = BookRelationship.new(params[:book_relationship])
+        @relationship = Review.new(params[:review])
 
         book = add_rating_to_book(@relationship.book, @relationship.rating.to_f)
 
@@ -16,13 +16,13 @@ class BookRelationshipsController < ApplicationController
     end
 
     def update
-        @relationship = BookRelationship.find(params[:id])
+        @relationship = Review.find(params[:id])
         
         old_rating = @relationship.rating.to_f
-        new_rating = params[:book_relationship]['rating'].to_f
+        new_rating = params[:review]['rating'].to_f
         book = update_rating_of_book(@relationship.book, old_rating, new_rating)
 
-        if @relationship.update_attributes(params[:book_relationship]) && book.save
+        if @relationship.update_attributes(params[:review]) && book.save
             # update successful
             flash[:success] = "Review updated"
             redirect_to book_path(@relationship.book)
@@ -33,7 +33,7 @@ class BookRelationshipsController < ApplicationController
     end
 
     def destroy
-        @relationship = BookRelationship.find(params[:id])
+        @relationship = Review.find(params[:id])
         
         remove_rating_from_book(@relationship.book, @relationship.rating.to_f).save
 

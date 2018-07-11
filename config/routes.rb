@@ -18,7 +18,7 @@ GoodReads::Application.routes.draw do
   resources :users
   resources :user_sessions,   only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :book_relationships, only: [:create, :update, :destroy]  
+  resources :reviews, only: [:create, :update, :destroy]  
   resources :statuses, only: [:create, :update, :destroy]
   resources :my_books, only: [:index]
 

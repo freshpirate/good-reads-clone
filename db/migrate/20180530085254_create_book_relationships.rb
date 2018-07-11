@@ -1,6 +1,6 @@
-class CreateBookRelationships < ActiveRecord::Migration
+class CreateReviews < ActiveRecord::Migration
   def change
-    create_table :book_relationships do |t|
+    create_table :reviews do |t|
       t.integer :user_id
       t.integer :book_id
       t.string :status
@@ -10,9 +10,9 @@ class CreateBookRelationships < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :book_relationships, :user_id
-    add_index :book_relationships, :book_id
-    add_index :book_relationships, [:user_id, :book_id], unique: true
-    add_index :book_relationships, [:user_id, :status]
+    add_index :reviews, :user_id
+    add_index :reviews, :book_id
+    add_index :reviews, [:user_id, :book_id], unique: true
+    add_index :reviews, [:user_id, :status]
   end
 end

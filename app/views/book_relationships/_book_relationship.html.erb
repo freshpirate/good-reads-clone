@@ -2,24 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="span1">
-                <%= link_to image_tag(book_relationship.book.cover, alt: book_relationship.book.title, width: '50px'), book_relationship.book %>
+                <%= link_to image_tag(review.book.cover, alt: review.book.title, width: '50px'), review.book %>
             </div>
 
             <div class="span11">
-                <span class="content"><b>Title: </b><%= link_to book_relationship.book.title, book_relationship.book %></span>
-                <span class="content"><b>Rating: </b> <%= book_relationship.rating %></span>
-                <span class="content"><b>Comment: </b> <%= book_relationship.review %></span>
+                <span class="content"><b>Title: </b><%= link_to review.book.title, review.book %></span>
+                <span class="content"><b>Rating: </b> <%= review.rating %></span>
+                <span class="content"><b>Comment: </b> <%= review.review %></span>
             </div>
         </div>
 
         <div class="row">
             <span class="timestamp span3">
-                Reviewed <%= time_ago_in_words(book_relationship.created_at) %> ago.
+                Reviewed <%= time_ago_in_words(review.created_at) %> ago.
             </span>
-            <% if current_user?(book_relationship.user) %>
-                <%= link_to "delete", book_relationship, method: :delete,
+            <% if current_user?(review.user) %>
+                <%= link_to "delete", review, method: :delete,
                                                 data: { confirm: "Are you sure?" },
-                                                title: book_relationship.review,
+                                                title: review.review,
                                                 class: "span1" %>
             <% end %>
         </div>

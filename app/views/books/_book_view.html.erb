@@ -40,7 +40,7 @@
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal">
-        <% if @book.book_relationships.find_by_user_id(current_user).nil? %>
+        <% if @book.reviews.find_by_user_id(current_user).nil? %>
           Add a Review
         <% else %>
           Update Review
