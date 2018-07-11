@@ -1,7 +1,8 @@
 class BooksController < ApplicationController
   before_filter :require_admin_privileges, only: [:new, :create, :update, :destroy, :edit]
   before_filter :require_user, only: [:show]
-
+  before_filter :find_book_by_params, only: [:show, :edit, :update, :destroy]
+  
   # GET /books
   # GET /books.json
   def index
@@ -42,9 +43,6 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-
-    # byebug
-    @book = Book.find(params[:id])
     @review_items = @book.reviews.paginate(page: params[:page])
     @status_categories = StatusCategory.all
     @current_status = current_user.user_book_statuses.find_by_book_id(@book)
@@ -76,7 +74,6 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
-    @book = Book.find(params[:id])
   end
 
   # POST /books
@@ -98,8 +95,6 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    @book = Book.find(params[:id])
-
     respond_to do |format|
       if @book.update_attributes(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -114,7 +109,6 @@ class BooksController < ApplicationController
   # DELETE /books/1
   # DELETE /books/1.json
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
 
     respond_to do |format|

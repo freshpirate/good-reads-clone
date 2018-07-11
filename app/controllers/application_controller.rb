@@ -6,6 +6,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def find_user_by_params
+    @user = User.find(params[:id])
+  end
+
+  def find_book_by_params
+    @book = Book.find(params[:id])
+  end
+
   def correct_user
     @user = User.find(params[:id])
     if !current_user?(@user)

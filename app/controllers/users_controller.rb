@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     before_filter :require_no_user, :only => [:new, :create]
     before_filter :require_user, :only => [:edit, :update, :show, :destroy, :index]
     before_filter :correct_user,   only: [:edit, :update, :destroy]
+    before_filter :find_user_by_params, only: [:update, :show, :confirm]
 
     def index
         @users = User.paginate(page: params[:page])
@@ -61,8 +62,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
-
         if @user.update_attributes(params[:user])
             # update successful
             flash[:success] = "Profile updated"
@@ -76,12 +75,10 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
         @relationships = @user.reviews.paginate(page: params[:page])
     end
 
     def confirm
-        @user = User.find(params[:id])
         if @user.confirmation_token == params[:token]
             if @user.update_attributes(email_confirmation: true)
                 # update successful

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   acts_as_authentic
-  attr_protected :email
+  attr_protected :admin
   
   has_many :reviews, foreign_key: "user_id", dependent: :destroy
   has_many :user_book_statuses, foreign_key: 'user_id', dependent: :destroy
