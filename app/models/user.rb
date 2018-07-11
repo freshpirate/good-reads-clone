@@ -8,11 +8,6 @@ class User < ActiveRecord::Base
 
   validate :spam_filter
 
-  def deliver_password_reset_instructions!
-    reset_perishable_token!
-    PasswordResetMailer.reset_email(self).deliver_now
-  end
-
   private 
 
   def spam_filter
