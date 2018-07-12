@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @relationships = @user.reviews.paginate(page: params[:page])
+        @relationships = @user.reviews.paginate(page: params[:page]).preload(:book)
     end
 
     def confirm

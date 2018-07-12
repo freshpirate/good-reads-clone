@@ -47,13 +47,13 @@ class ReviewsController < ApplicationController
     def add_rating_to_book(book, rating)
         book.average_rating = ((book.average_rating * book.rating_count) + rating) / (book.rating_count + 1)
         book.rating_count = book.rating_count + 1
-        return book
+        book
     end
 
     def remove_rating_from_book(book, rating)
         book.average_rating = ((book.average_rating * book.rating_count) - rating) / (book.rating_count - 1)
         book.rating_count = book.rating_count - 1
-        return book
+        book
     end
 
     def update_rating_of_book(book, old_rating, new_rating)
@@ -64,6 +64,6 @@ class ReviewsController < ApplicationController
         puts "New Rating: #{old_rating}"
 
         book.average_rating = ((book.average_rating * book.rating_count) + diff ) / (book.rating_count)
-        return book
+        book
     end
 end

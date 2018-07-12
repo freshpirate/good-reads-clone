@@ -43,9 +43,10 @@ class BooksController < ApplicationController
   # GET /books/1
   # GET /books/1.json
   def show
-    @review_items = @book.reviews.paginate(page: params[:page])
+    @review_items = @book.reviews.paginate(page: params[:page]).preload(:user)
     @status_categories = StatusCategory.all
     @current_status = current_user.user_book_statuses.find_by_book_id(@book)
+    @is_review_not_present = @book.reviews.find_by_user_id(current_user).nil?
     
     @relationship = @book.reviews.find_by_user_id(current_user.id)
     
