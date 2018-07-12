@@ -12,7 +12,7 @@ class SpamDomainController < ApplicationController
   end
 
   def destroy
-    p '^'*100
+    p "^" * 100
     p params
     SpamFilter.delete(params[:domain_name])
 

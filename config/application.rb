@@ -1,6 +1,6 @@
-require File.expand_path('../boot', __FILE__)
+require File.expand_path("../boot", __FILE__)
 
-require 'rails/all'
+require "rails/all"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -57,15 +57,15 @@ module GoodReads
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = "1.0"
 
     # Set Background jobs adapter
     # config.active_job.queue_adapter = :sidekiq
 
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :options]
+        origins "*"
+        resource "*", headers: :any, methods: [:get, :post, :options]
       end
     end
   end

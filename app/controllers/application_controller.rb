@@ -17,8 +17,8 @@ class ApplicationController < ActionController::Base
   def correct_user
     @user = User.find(params[:id])
     if !current_user?(@user)
-        flash[:warning] = "Sign in with the appropriate User to perform this action"
-        redirect_to root_url
+      flash[:warning] = "Sign in with the appropriate User to perform this action"
+      redirect_to root_url
     end
   end
 
@@ -28,9 +28,9 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    p request.headers.has_key?('HTTP_API_KEY')
+    p request.headers.has_key?("HTTP_API_KEY")
 
-    if not defined?(@current_user) and (request.headers.has_key?('HTTP_API_KEY'))
+    if not defined?(@current_user) and (request.headers.has_key?("HTTP_API_KEY"))
       @current_user = User.find_by_persistence_token(request.headers["HTTP_API_KEY"])
     end
 
@@ -61,11 +61,11 @@ class ApplicationController < ActionController::Base
           json_obj["status"] = {}
           json_obj["status"] = {
             "signed_in": true,
-            "messages": [notice_str]
+            "messages": [notice_str],
           }
 
           # json_obj["user"] = current_user
-          p '*'*50
+          p "*" * 50
           p json_obj
 
           render json: json_obj, error: notice_str
@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
           json_obj["status"] = {}
           json_obj["status"] = {
             "signed_in": true,
-            "messages": [notice_str]
+            "messages": [notice_str],
           }
 
           # json_obj["user"] = current_user
@@ -121,7 +121,7 @@ class ApplicationController < ActionController::Base
           json_obj["status"] = {}
           json_obj["status"] = {
             "signed_in": true,
-            "messages": [notice_str]
+            "messages": [notice_str],
           }
 
           # json_obj["user"] = current_user
@@ -132,11 +132,11 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   def store_location
     session[:return_to] = request.url
   end
-  
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil

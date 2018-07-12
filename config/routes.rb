@@ -5,29 +5,27 @@ GoodReads::Application.routes.draw do
 
   resources :books
 
-
-  match '/help',    to: 'static_pages#help'
-  match '/about',   to: 'static_pages#about'
-  match '/contact', to: 'static_pages#contact'
+  match "/help", to: "static_pages#help"
+  match "/about", to: "static_pages#about"
+  match "/contact", to: "static_pages#contact"
 
   root :to => "static_pages#home"
 
-  resources :spam_domain,           only: [:create, :index]
+  resources :spam_domain, only: [:create, :index]
   delete "/spam_domain", to: "spam_domain#destroy", as: :delete_spam
 
   resources :users
-  resources :user_sessions,   only: [:create, :destroy]
+  resources :user_sessions, only: [:create, :destroy]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :reviews, only: [:create, :update, :destroy]  
+  resources :reviews, only: [:create, :update, :destroy]
   resources :user_book_statuses, only: [:create, :update, :destroy]
   resources :my_books, only: [:index]
 
-
-  delete '/sign_out', to: "user_sessions#destroy", as: :sign_out
-  get '/sign_in', to: "user_sessions#new", as: :sign_in
+  delete "/sign_out", to: "user_sessions#destroy", as: :sign_out
+  get "/sign_in", to: "user_sessions#new", as: :sign_in
 
   # New User Registration confirmation
-  get '/confirm_user/:id/:token', to: "users#confirm", as: :email_confirmation
+  get "/confirm_user/:id/:token", to: "users#confirm", as: :email_confirmation
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
