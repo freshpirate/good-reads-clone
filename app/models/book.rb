@@ -3,7 +3,7 @@ class Book < ActiveRecord::Base
   #     :published_year, :publisher, :synopsis,
   #     :title, :average_rating, :rating_count
 
-  has_many :reviews, foreign_key: "book_id", dependent: :destroy
+  has_many :reviews, foreign_key: "book_id", dependent: :destroy, autosave: true
   has_many :user_book_statuses, foreign_key: :book_id, dependent: :destroy
   has_many :users, through: :reviews
 end

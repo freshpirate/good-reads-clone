@@ -5,14 +5,15 @@ class ReviewsController < ApplicationController
     @relationship = Review.new(params[:review])
 
     book = add_rating_to_book(@relationship.book, @relationship.rating.to_f)
+    book.reviews.new(params[:review])
 
-    relationship_saved, book_updated = false, false
-    Book.transaction do
-      relationship_saved = @relationship.save
-      book_updated = book.save
-    end
+    # relationship_saved, book_updated = false, false
+    # Book.transaction do
+    #   relationship_saved = @relationship.save
+    #   book_updated = book.save
+    # end
 
-    if relationship_saved && book_updated
+    if book.save
       flash[:success] = "Review added successfully!"
       redirect_to book_path(@relationship.book)
     else
